@@ -6,6 +6,6 @@ RUN npm install
 COPY . .
 
 ENV PORT=3000
-EXPOSE 3000
+EXPOSE 3000 3001
 
 CMD ["npm", "start"]
