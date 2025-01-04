@@ -65,8 +65,6 @@ export const startExpressServices = async (): Promise<void> => {
     app.use(morgan('dev'));
     // Configurar CORS en Express
     app.use(cors(corsOptions));
-    app.post('/api/login', );
-
     app.post(
         '/api/login',
         loginValidationRules,
