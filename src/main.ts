@@ -80,8 +80,8 @@ export const startExpressServices = async (): Promise<void> => {
         (req: Request, res: Response): Promise<void> => loginController.handle(req, res)
     );
 
-    app.listen(3001, '0.0.0.0', () => {
-        console.log('Servidor de Express en el puerto 3001');
+    app.listen(26704, '0.0.0.0', () => {
+        console.log('Servidor de Express en el puerto 26704');
     });
 };
 
