@@ -40,7 +40,7 @@ export const startFastifyServices = async (): Promise<void> => {
     );
 
     try {
-        await app.listen({ port });
+        await app.listen({ port, host: '0.0.0.0'  });
         console.log('Servidor de Fastify en el puerto 3000');
     } catch (err) {
         console.error(err);
@@ -60,7 +60,6 @@ export const startExpressServices = async (): Promise<void> => {
     app.use(cors(corsOptions));
     app.post('/api/login', );
 
-
     app.post(
         '/api/login',
         loginValidationRules,
@@ -68,9 +67,7 @@ export const startExpressServices = async (): Promise<void> => {
         (req: Request, res: Response): Promise<void> => loginController.handle(req, res)
     );
 
-
-
-    app.listen(port, () => {
+    app.listen(port, '0.0.0.0', () => {
         console.log('Servidor de Express en el puerto 3001');
     });
 };
