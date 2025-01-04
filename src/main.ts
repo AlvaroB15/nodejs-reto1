@@ -16,7 +16,8 @@ import {loginValidationRules, validateLogin} from "./infrastructure/http/express
 export const startFastifyServices = async (): Promise<void> => {
     const app: FastifyInstance = fastify(
         {
-            logger: true
+            logger: true,
+            ignoreTrailingSlash: true
         }
     );
 
@@ -26,7 +27,13 @@ export const startFastifyServices = async (): Promise<void> => {
     const container = new ContainerFastify();
     const registerController: RegisterController = container.getRegisterController();
     const listUsersController: UsersController = container.getListUsersController();
-    const port = Number(process.env.PORT) || 3000; // Un solo puerto para ambos servicios
+    const port = Number(process.env.PORT) || 3000;
+
+    // Agregar un log para debugging
+    app.addHook('onRequest', (request, _reply, done) => {
+        console.log(`Incoming request: ${request.method} ${request.url}`);
+        done();
+    });
 
     app.post('/api/register', {
         schema: registerController.schema,
