@@ -26,9 +26,7 @@ export const startFastifyServices = async (): Promise<void> => {
     const container = new ContainerFastify();
     const registerController: RegisterController = container.getRegisterController();
     const listUsersController: UsersController = container.getListUsersController();
-    // const port = Number(process.env.PORT_FASTIFY!);
     const port = Number(process.env.PORT) || 3000; // Un solo puerto para ambos servicios
-
 
     app.post('/api/register', {
         schema: registerController.schema,
@@ -54,9 +52,7 @@ export const startExpressServices = async (): Promise<void> => {
     const app: Express = express();
     const container = new ContainerExpress();
     const loginController: LoginController = container.getLoginController();
-    // const port = Number(process.env.PORT_EXPRESS!);
-    const port = Number(process.env.PORT) || 3000; // Un solo puerto para ambos servicios
-
+    // const port = Number(process.env.PORT) || 3000; // Un solo puerto para ambos servicios
 
     app.use(express.json());
     app.use(morgan('dev'));
@@ -71,7 +67,7 @@ export const startExpressServices = async (): Promise<void> => {
         (req: Request, res: Response): Promise<void> => loginController.handle(req, res)
     );
 
-    app.listen(port + 1, '0.0.0.0', () => {
+    app.listen(3001, '0.0.0.0', () => {
         console.log('Servidor de Express en el puerto 3001');
     });
 };
